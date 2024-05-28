@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,6 +15,15 @@ export class UsersService {
   ) { }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
+
+    const userAlreadyExists = await this.usersRepository.findOne({
+      where: {
+        username: createUserDto.username
+      }
+    })
+
+    if (userAlreadyExists) throw new HttpException("Username already in use", HttpStatus.CONFLICT)
+
     const hashedPassword = await hash(createUserDto.password, 8)
 
     return this.usersRepository.save({ ...createUserDto, password: hashedPassword })
