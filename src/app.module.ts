@@ -5,6 +5,8 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { OffersModule } from './offers/offers.module';
 import { Offer } from './offers/entities/offer.entity';
+import { BidsModule } from './bids/bids.module';
+import { Bid } from './bids/entities/bid.entity';
 
 
 @Module({
@@ -19,11 +21,12 @@ import { Offer } from './offers/entities/offer.entity';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [User, Offer],
+      entities: [User, Offer, Bid],
       synchronize: true
     }),
     UsersModule,
-    OffersModule
+    OffersModule,
+    BidsModule
   ],
   controllers: [],
   providers: [],

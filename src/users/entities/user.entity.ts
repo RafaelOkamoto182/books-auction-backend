@@ -1,3 +1,4 @@
+import { Bid } from "src/bids/entities/bid.entity"
 import { Offer } from "src/offers/entities/offer.entity"
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 
@@ -30,6 +31,9 @@ export class User {
     @UpdateDateColumn()
     updated_at: Date
 
-    @OneToMany(() => Offer, offer => offer.user_id)
+    @OneToMany(() => Offer, offer => offer.user_id) //TO-DO: alter user_id at Offer entity to be seller_id
     user_offers: Offer[]
+
+    @OneToMany(() => Bid, bid => bid.buyer_id)
+    user_bids: Bid[]
 }
