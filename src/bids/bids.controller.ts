@@ -9,9 +9,9 @@ export class BidsController {
   constructor(private readonly bidsService: BidsService) { }
 
   @Post()
-  create(@Body() createBidDto: CreateBidDto) {
-    const createdOffer = this.bidsService.create(createBidDto)
-    return createdOffer
+  async create(@Body() createBidDto: CreateBidDto) {
+    const createdBid = await this.bidsService.create(createBidDto)
+    return createdBid
   }
 
   @Get()

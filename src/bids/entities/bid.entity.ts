@@ -1,3 +1,4 @@
+import { Offer } from "src/offers/entities/offer.entity";
 import { User } from "src/users/entities/user.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -29,8 +30,9 @@ export class Bid {
     @UpdateDateColumn()
     updated_at: Date
 
-    @ManyToOne(() => User, user => user.id)
-    @JoinColumn({ name: 'buyer_id' })
-    buyer_id: User
+    @ManyToOne(() => User, user => user.user_bids)
+    user: User
 
+    @ManyToOne(() => Offer, offer => offer.bids)
+    offer_id: Offer
 }

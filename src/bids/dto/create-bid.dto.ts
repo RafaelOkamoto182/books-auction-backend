@@ -1,4 +1,4 @@
-import { IsDecimal, IsString } from "class-validator"
+import { IsDecimal, IsOptional, IsString } from "class-validator"
 
 export class CreateBidDto {
 
@@ -6,7 +6,7 @@ export class CreateBidDto {
     offer_id: string
 
     @IsString()
-    user_id: string //TO-Do: this will be sent through cookies
+    user_id: string
 
     @IsDecimal({ decimal_digits: '2,2' },
         { message: 'bid_amount must be a decimal number with exactly 2 digits after the decimal point' })

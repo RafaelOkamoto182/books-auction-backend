@@ -16,13 +16,15 @@ export class BidsService {
 
   ) { }
 
-  async create(createBidDto: CreateBidDto): Promise<Bid> {
-    const offer = await this.offersRepository.findOneBy({ id: createBidDto.offer_id })
+  async create(createBidDto: CreateBidDto) {
+    //const offer = await this.offersRepository.findOneBy({ id: createBidDto.offer_id })
 
-    if (!offer) throw new HttpException('Offer not found', HttpStatus.NOT_FOUND)
+    console.log(createBidDto)
+    //console.log(offer)
+    //if (!offer) throw new HttpException('Offer not found', HttpStatus.NOT_FOUND)
 
     const createdBid = await this.bidsRepository.save({ ...createBidDto })
-    return createdBid;
+    return 2;
   }
 
   findAll() {

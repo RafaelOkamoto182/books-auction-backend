@@ -34,6 +34,6 @@ export class User {
     @OneToMany(() => Offer, offer => offer.user_id) //TO-DO: alter user_id at Offer entity to be seller_id
     user_offers: Offer[]
 
-    @OneToMany(() => Bid, bid => bid.buyer_id)
+    @OneToMany(() => Bid, bid => bid.user)
     user_bids: Bid[]
 }
