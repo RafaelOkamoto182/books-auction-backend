@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Offer } from "src/offers/entities/offer.entity"
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 
 export enum UserType {
     BUYER = "buyer",
@@ -28,4 +29,7 @@ export class User {
 
     @UpdateDateColumn()
     updated_at: Date
+
+    @OneToMany(() => Offer, offer => offer.user_id)
+    user_offers: Offer[]
 }
