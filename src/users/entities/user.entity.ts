@@ -6,7 +6,7 @@ export enum UserType {
 }
 
 @Entity()
-export class UserEntity {
+export class User {
     @PrimaryGeneratedColumn("uuid")
     id: string
 
@@ -15,9 +15,6 @@ export class UserEntity {
 
     @Column({ type: "varchar", length: 255 })
     password: string
-
-    @Column({ type: "varchar", length: 100 })
-    email: string
 
     @Column({
         type: "enum",
