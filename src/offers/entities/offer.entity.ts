@@ -1,6 +1,4 @@
-import { Bid } from "src/bids/entities/bid.entity";
-import { User } from "src/users/entities/user.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Offer {
@@ -28,11 +26,4 @@ export class Offer {
     @UpdateDateColumn()
     updated_at: Date
 
-    @ManyToOne(() => User, user => user.user_offers, {
-        onDelete: "CASCADE"
-    })
-    user_id: User
-
-    @OneToMany(() => Bid, bid => bid.offer_id)
-    bids: Bid[]
 }

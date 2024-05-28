@@ -1,6 +1,4 @@
-import { Offer } from "src/offers/entities/offer.entity";
-import { User } from "src/users/entities/user.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 export enum BidStatus {
     PENDING = "pending",
@@ -30,9 +28,4 @@ export class Bid {
     @UpdateDateColumn()
     updated_at: Date
 
-    @ManyToOne(() => User, user => user.user_bids)
-    user: User
-
-    @ManyToOne(() => Offer, offer => offer.bids)
-    offer_id: Offer
 }
