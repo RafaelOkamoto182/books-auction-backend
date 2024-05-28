@@ -15,13 +15,11 @@ export class UsersService {
   ) { }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-
     const userAlreadyExists = await this.usersRepository.findOne({
       where: {
         username: createUserDto.username
       }
     })
-
     if (userAlreadyExists) throw new HttpException("Username already in use", HttpStatus.CONFLICT)
 
     const hashedPassword = await hash(createUserDto.password, 8)
@@ -29,22 +27,14 @@ export class UsersService {
     return this.usersRepository.save({ ...createUserDto, password: hashedPassword })
   }
 
-  findAll() {
-    return `This action returns all users`;
-  }
-  /* 
-    async findOne(id: string) {
-      const user = await this.usersRepository.findOneBy(id)
-  
-      if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND)
-      return `This action returns a #${id} user`;
-    } */
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async findOne(id: string) {
+    const user = await this.usersRepository.findOneBy({ id })
+
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+
+    delete user.password
+    return user;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
 }
